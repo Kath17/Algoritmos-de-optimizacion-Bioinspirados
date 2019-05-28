@@ -30,15 +30,12 @@ def print_Hormigas_C(Lista):
         print("| Hormiga ",i," | ",Lista[i][0],",",Lista[i][1]," | ",Lista[i][2]," |")
     print(" --------------------------------------------------------------------------------")
 
-# ρ = 0.99
-# α = 1
-# β = 1
-# Q = 1
-# q_0 = 0.7
-# φ = 0.05
-# Feromona Inicial = 0.1
-# Cantidad de Hormigas: 3
-# Cantidad de Iteraciones: 100
+# Ingrese el número de la poblacion: 4
+# Ingrese el numero de iteraciones: 300
+# Ingrese la tasa de evaporacion: 0.99
+# Ingrese parametro alpha: 1.0
+# Ingrese parametro beta: 1.0
+# Ingresar probabilidad de mutacion: 20.0
 
 # ---------------------- SISTEMA DE HORMIGAS MEJOR PEOR ---------------------#
 
@@ -61,15 +58,10 @@ def Entradas():
     beta = float(input("Ingrese parametro beta: "))
     print(beta)
 
-    Q = int(input("Constante Q: "))
-    print(Q)
+    prob = float(input("Ingresar probabilidad de mutacion: "))
+    print(prob)
 
-    q_0 = float(input("Ingresar parametro q_0: "))
-    print(q_0)
-
-    phi = float(input("Ingresar constante phi"))
-
-    return poblacion,iteraciones,evaporacion, alpha, beta,Q, q_0, phi
+    return poblacion,iteraciones,evaporacion, alpha, beta, prob
 
 def GenerarPoblacion(poblacion):
     ListaHormigas = []
@@ -82,9 +74,8 @@ def GenerarVisibilidad(Matriz):
     return 1/Matriz
 
 #[ [["A"],["B,"C"]], ["C"]["D","E"]]
-def CalcularCiudadSiguienteQ_0Menor(Feromona,MatrizVisibilidad,ListHormigas,k,alpha,beta):
+def CalcularCiudadSiguiente(Feromona,MatrizVisibilidad,ListHormigas,k,alpha,beta):
 
-    print("\n -----------------   Recorrido por diversificacion -------------------")
     Hormiga = ListHormigas[k]
     ult = ListHormigas[k][0][len(ListHormigas[k][0])-1]
     print("\n               ----- Hormiga ",k,"----                " )
@@ -98,7 +89,7 @@ def CalcularCiudadSiguienteQ_0Menor(Feromona,MatrizVisibilidad,ListHormigas,k,al
         print(ult,"-",Hormiga[1][i],"  ","t = ",t, "  ","n = ",n, "  ","t*n = ",round(pow(t,alpha)*pow(n,beta),6))
         # ---- SUMATORIA DE PROB
         sumatoria = sumatoria + pow(t,alpha)*pow(n,beta)
-        ListaCiudades.append((Hormiga[1][i],pow(t,alpha)*pow(n,beta)))
+        ListaCiudades.append((Hormiga[1][i],(pow(t,alpha)*pow(n,beta))))
 
     ran = random.uniform(0,1)
     acumulado= 0
@@ -123,32 +114,6 @@ def CalcularCiudadSiguienteQ_0Menor(Feromona,MatrizVisibilidad,ListHormigas,k,al
     print("\nNumero aleatorio: ",ran)
     return siguiente
 
-def CalcularCiudadSiguienteQMenor(Feromona,MatrizVisibilidad,ListHormigas,k,alpha,beta):
-
-    print("\n  -----------   Recorrido por intensificación ----------------------")
-    Hormiga = ListHormigas[k]
-    ult = ListHormigas[k][0][len(ListHormigas[k][0])-1]
-    print("\n               ----- Hormiga ",k,"----                " )
-    print("Ciudad Inicial: ",ult)
-
-    ListaCiudades =[]
-    mayor = -1
-    indx = -1
-    siguiente =""
-    for i in range(len(Hormiga[1])):
-        t = Feromona[Hormiga[0][len(Hormiga[0])-1]][Hormiga[1][i]]
-        n = round(MatrizVisibilidad[Hormiga[0][len(Hormiga[0])-1]][Hormiga[1][i]],6)
-        print(ult,"-",Hormiga[1][i],"  ","t = ",t, "  ","n = ",n, "  ","t*n = ",round(t*pow(n,beta),6))
-        ListaCiudades.append((Hormiga[1][i],t*pow(n,beta)))
-        if(t*pow(n,beta)>mayor):
-            mayor = t*pow(n,beta)
-            indx = i
-
-    siguiente = ListaCiudades[indx][0]
-
-    print("Ciudad con mayor valor es: ",siguiente)
-    return siguiente
-
 def Distancia(List,Grafo):
     sum = 0
     primerNodo = List[0]
@@ -170,44 +135,77 @@ def HallarMejorCamino(Lista,Grafo):
             mejor = i
     return mejor
 
+def HallarPeorCamino(Lista,Grafo):
+    peor = 0
+    peor_dist = 0
+    for i in range(len(Lista)):
+        dist = Distancia(Lista[i][0],Grafo)
+        Lista[i].append(dist)
+        if (dist > peor_dist):
+            peor_dist = dist
+            peor = i
+    return peor
+
 def UsoArco(ListaCamino,Ciudad1,Ciudad2):
     for i in range(0,len(ListaCamino)-1):
         if((ListaCamino[i]==Ciudad1 or ListaCamino[i]==Ciudad2) and (ListaCamino[i+1]==Ciudad1 or ListaCamino[i+1]==Ciudad2)):
             return True
     return False
 
-def HallarNuevasFeromonas(MatrizFeromona,ListaHormigas,MejorGlobal,evaporacion,Q,C_mejorGlobal):
+def HallarNuevasFeromonas(MatrizFeromona,MejorGlobal,evaporacion,C_mejorGlobal,PeorGlobal,C_peorGlobal):
     # print("Matriz de feromonas")
-    MatrizFeromona = { 'A':{'A':0,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'B':{'A':0.1,'B':0,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'C':{'A':0.1,'B':0.1,'C':0,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'D':{'A':0.1,'B':0.1,'C':0.1,'D':0,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'E':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'F':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
-                 'G':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0,'H':0.1,'I':0.1,'J':0.1},
-                 'H':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0,'I':0.1,'J':0.1},
-                 'I':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0,'J':0.1},
-                 'J':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0}}
+    # MatrizFeromona = pd.DataFrame(FeromonaOriginal)
     MatrizFeromona = MatrizFeromona * (1 - evaporacion)
     Ciudades = MatrizFeromona.keys()
+
     for i in range(len(Ciudades)):
         for j in range(len(Ciudades)):
-            # print(" ->",Ciudades[i],Ciudades[j])
             if(UsoArco(MejorGlobal,Ciudades[i],Ciudades[j])):
+                print(" ->",Ciudades[i],Ciudades[j])
                 print("   Si esta en el mejor camino"," ->  +",MatrizFeromona[Ciudades[i]][Ciudades[j]]," + ",(1/C_mejorGlobal))
                 MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + (1/C_mejorGlobal)
                 # MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + (1/C_mejorGlobal)
+            elif(UsoArco(PeorGlobal,Ciudades[i],Ciudades[j])):
+                print(" ->",Ciudades[i],Ciudades[j])
+                print("   Si esta en el peor camino"," ->  +",MatrizFeromona[Ciudades[i]][Ciudades[j]]," * ",(1-evaporacion))
+                MatrizFeromona[Ciudades[i]][Ciudades[j]] = (1 - evaporacion) * MatrizFeromona[Ciudades[i]][Ciudades[j]]
     return MatrizFeromona
 
-def actualizarArco(Feromonas,Ciudad1,Ciudad2,phi,t_0):
-    a = (1-phi)* Feromonas[Ciudad1][Ciudad2] + phi*t_0
-    Feromonas[Ciudad1][Ciudad2] = a
-    Feromonas[Ciudad2][Ciudad1] = a
-    return a
+def ReiniciarFeromonas(FeromonaOriginal):
+    FeromonaOriginal = pd.DataFrame(FeromonaOriginal)
+    return FeromonaOriginal
+
+# ----------------------- Muta? ----------------------------#
+def Muta(prob):
+    num = random.randint(1,100)
+    if(num<=prob):
+        return True
+    else:
+        return False
+
+def MediaFeromonas(MatrizFeromona, MejorGlobal):
+    numerador = Distancia(MejorGlobal,MatrizFeromona)
+    denominador = len(MejorGlobal)
+    return numerador/denominador
+
+def Mutacion(MatrizFeromona,MejorGlobal,prob):
+    Ciudades = MatrizFeromona.keys()
+    if(len(MejorGlobal)<=0):
+        t_umbral = 0
+    else:
+        t_umbral = MediaFeromonas(MatrizFeromona,MejorGlobal)
+
+    print("\n      --- Mutación ---")
+    for i in range(len(Ciudades)):
+        for j in range(len(Ciudades)):
+            if(Muta(prob)==True):
+                print("-> ",Ciudades[i]," - ",Ciudades[j]) #," con: ",MatrizFeromona[Ciudades[i]][Ciudades[j]])
+                MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + abs(np.random.normal(0,t_umbral))
+                print("    muta a: ",MatrizFeromona[Ciudades[i]][Ciudades[j]])
 
 def Main():
 
-    poblacion,iteraciones,evaporacion, alpha, beta,Q, q_0, phi = Entradas()
+    poblacion, iteraciones, evaporacion, alpha, beta, prob  = Entradas()
 
     Grafo = {'A':{'A':0,'B':12,'C':3, 'D':23,'E':1, 'F':5, 'G':23,'H':56,'I':12,'J':11},
              'B':{'A':12,'B':0,'C':9, 'D':18,'E':3, 'F':41,'G':45,'H':5, 'I':41,'J':27},
@@ -220,6 +218,7 @@ def Main():
              'I':{'A':12,'B':41,'C':14,'D':50,'E':14,'F':54,'G':57,'H':63,'I':0,'J':9 },
              'J':{'A':11,'B':27,'C':29,'D':42,'E':33,'F':81,'G':48,'H':24,'I':9,'J':0 }}
 
+    # MATRIZ FEROMONA ORIGINAL
     Feromona = { 'A':{'A':0,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
                  'B':{'A':0.1,'B':0,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
                  'C':{'A':0.1,'B':0.1,'C':0,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0.1},
@@ -249,11 +248,26 @@ def Main():
     MatrizFeromona = pd.DataFrame(Feromona)
     print(MatrizFeromona)
 
+    PeorHormiga = []
     MejorHormiga = []
     C_mejorGlobal = 9999
+    C_mejorGlobal_anterior = 9999
+    C_peorGlobal = 0
     siguiente = ""
 
+    count = -1
     for i in range(iteraciones):
+        count = count +1
+        if ((count % (iteraciones*(20/100))==0) and C_mejorGlobal_anterior == C_mejorGlobal):
+            print("\nEl mejor global anterior de: ", C_mejorGlobal_anterior," no mejora, se reincia: ")
+            C_mejorGlobal_anterior = C_mejorGlobal
+            MatrizFeromona = ReiniciarFeromonas(Feromona)
+            print("\nMatriz de Feromona reiniciada:\n")
+            print(MatrizFeromona)
+        else:
+            print("\nMejor global mejoró de: ",C_mejorGlobal_anterior," a: ",C_mejorGlobal)
+            # C_mejorGlobal_anterior = C_mejorGlobal
+
         Lista = copy.deepcopy(ListaHormigas)
         print("\n-------------------------------------------------------------------------")
         print("\n-------------------------------- ITERACION "+str(i)+"----------------------------  ")
@@ -263,34 +277,35 @@ def Main():
         for k in range(poblacion):
             print("\n------------------- HORMIGA "+str(k)+"----------------------")
             while(len(Lista[k][1])>0): #Mientras hayan ciudades por recorrer
-                q = random.uniform(0,1)
-                print("q: ",q)
-                if(q<=q_0):
-                    siguiente = CalcularCiudadSiguienteQMenor(MatrizFeromona,MatrizVisibilidad,Lista,k,alpha,beta)
-                else:
-                    siguiente = CalcularCiudadSiguienteQ_0Menor(MatrizFeromona,MatrizVisibilidad,Lista,k,alpha,beta)
-
+                siguiente = CalcularCiudadSiguiente(MatrizFeromona,MatrizVisibilidad,Lista,k,alpha,beta)
                 print("Ciudad Siguiente: ",siguiente)
                 Lista[k][0].append(siguiente)
                 Lista[k][1].remove(siguiente)
-                print("Actualizar: ",Lista[k][0][-2]," con ",siguiente," y phi: ",phi)
-                res = actualizarArco(MatrizFeromona,Lista[k][0][-2],siguiente,phi,t_0)
+                print("Actualizar: ",Lista[k][0][-2]," con ",siguiente)
                 print("Camino: ",Lista[k])
 
             print_Hormigas(Lista)
 
-        pos = HallarMejorCamino(Lista,Grafo);
+        pos_mejor = HallarMejorCamino(Lista,Grafo);
+        pos_peor = HallarPeorCamino(Lista,Grafo);
         print_Hormigas_C(Lista)
-        print("\nMejor Hormiga Local: ",Lista[pos][0]," con: ",Lista[pos][2])
+        print("\nMejor Hormiga Local: ",Lista[pos_mejor][0]," con: ",Lista[pos_mejor][2])
+        print("Peor Hormiga Local: ",Lista[pos_peor][0]," con: ",Lista[pos_peor][2])
         #Actualizando mejor hormiga
-        if(Lista[pos][2]<C_mejorGlobal):
-            MejorHormiga = Lista[pos]
-            C_mejorGlobal = Lista[pos][2]
+        if(Lista[pos_mejor][2] < C_mejorGlobal):
+            MejorHormiga = Lista[pos_mejor]
+            C_mejorGlobal = Lista[pos_mejor][2]
+
+        #Actualizando peor hormiga
+        # if(Lista[pos_peor][2] > C_peorGlobal):
+        #     PeorHormiga = Lista[pos_peor]
+        #     C_peorGlobal = Lista[pos_peor][2]
 
         print("\nMejor Hormiga Global: ",MejorHormiga[0]," con: ",C_mejorGlobal)
+        # print("Peor Hormiga Global: ",PeorHormiga[0]," con: ",C_peorGlobal)
 
-        MatrizFeromona = HallarNuevasFeromonas(MatrizFeromona,Lista,MejorHormiga[0],evaporacion,Q,C_mejorGlobal)
-
+        MatrizFeromona = HallarNuevasFeromonas(MatrizFeromona,MejorHormiga[0],evaporacion,C_mejorGlobal,Lista[pos_peor][0],C_peorGlobal)
+        Mutacion(MatrizFeromona,MejorHormiga[0],prob)
         print("\n ------------------------MATRIZ FEROMONA------------------------------\n")
         print(MatrizFeromona.to_string())
 
