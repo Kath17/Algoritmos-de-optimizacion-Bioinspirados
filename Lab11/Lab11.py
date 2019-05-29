@@ -158,17 +158,23 @@ def HallarNuevasFeromonas(MatrizFeromona,MejorGlobal,evaporacion,C_mejorGlobal,P
     MatrizFeromona = MatrizFeromona * (1 - evaporacion)
     Ciudades = MatrizFeromona.keys()
 
-    for i in range(len(Ciudades)):
-        for j in range(len(Ciudades)):
+    for i in range(0,len(Ciudades)):
+        for j in range(i+1,len(Ciudades)):
             if(UsoArco(MejorGlobal,Ciudades[i],Ciudades[j])):
                 print(" ->",Ciudades[i],Ciudades[j])
                 print("   Si esta en el mejor camino"," ->  +",MatrizFeromona[Ciudades[i]][Ciudades[j]]," + ",(1/C_mejorGlobal))
                 MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + (1/C_mejorGlobal)
+                print(" ->",Ciudades[j],Ciudades[i])
+                print("   Si esta en el mejor camino"," ->  +",MatrizFeromona[Ciudades[j]][Ciudades[i]]," + ",(1/C_mejorGlobal))
+                MatrizFeromona[Ciudades[j]][Ciudades[i]] = MatrizFeromona[Ciudades[j]][Ciudades[i]] + (1/C_mejorGlobal)
                 # MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + (1/C_mejorGlobal)
             elif(UsoArco(PeorGlobal,Ciudades[i],Ciudades[j])):
                 print(" ->",Ciudades[i],Ciudades[j])
                 print("   Si esta en el peor camino"," ->  +",MatrizFeromona[Ciudades[i]][Ciudades[j]]," * ",(1-evaporacion))
                 MatrizFeromona[Ciudades[i]][Ciudades[j]] = (1 - evaporacion) * MatrizFeromona[Ciudades[i]][Ciudades[j]]
+                print(" ->",Ciudades[j],Ciudades[i])
+                print("   Si esta en el peor camino"," ->  +",MatrizFeromona[Ciudades[j]][Ciudades[i]]," * ",(1-evaporacion))
+                MatrizFeromona[Ciudades[j]][Ciudades[i]] = (1 - evaporacion) * MatrizFeromona[Ciudades[j]][Ciudades[i]]
     return MatrizFeromona
 
 def ReiniciarFeromonas(FeromonaOriginal):
@@ -196,11 +202,15 @@ def Mutacion(MatrizFeromona,MejorGlobal,prob):
         t_umbral = MediaFeromonas(MatrizFeromona,MejorGlobal)
 
     print("\n      --- Mutación ---")
-    for i in range(len(Ciudades)):
-        for j in range(len(Ciudades)):
+    for i in range(0,len(Ciudades)):
+        for j in range(i+1,len(Ciudades)):
             if(Muta(prob)==True):
                 print("-> ",Ciudades[i]," - ",Ciudades[j]) #," con: ",MatrizFeromona[Ciudades[i]][Ciudades[j]])
-                MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + abs(np.random.normal(0,t_umbral))
+                rando = np.random.normal(0,t_umbral)
+                if(rando<0):
+                    rando = np.random.normal(0,t_umbral)
+                MatrizFeromona[Ciudades[i]][Ciudades[j]] = MatrizFeromona[Ciudades[i]][Ciudades[j]] + rando
+                MatrizFeromona[Ciudades[j]][Ciudades[i]] = MatrizFeromona[Ciudades[j]][Ciudades[i]] + rando
                 print("    muta a: ",MatrizFeromona[Ciudades[i]][Ciudades[j]])
 
 def Main():
@@ -230,7 +240,19 @@ def Main():
                  'I':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0,'J':0.1},
                  'J':{'A':0.1,'B':0.1,'C':0.1,'D':0.1,'E':0.1,'F':0.1,'G':0.1,'H':0.1,'I':0.1,'J':0}}
 
+    # Feromona = { 'A':{'A':0,'B':10,'C':10,'D':10,'E':10,'F':10,'G':10,'H':10,'I':10,'J':10},
+    #              'B':{'A':10,'B':0,'C':10,'D':10,'E':10,'F':10,'G':10,'H':10,'I':10,'J':10},
+    #              'C':{'A':10,'B':10,'C':0,'D':10,'E':10,'F':10,'G':10,'H':10,'I':10,'J':10},
+    #              'D':{'A':10,'B':10,'C':10,'D':0,'E':10,'F':10,'G':10,'H':10,'I':10,'J':10},
+    #              'E':{'A':10,'B':10,'C':10,'D':10,'E':0,'F':10,'G':10,'H':10,'I':10,'J':10},
+    #              'F':{'A':10,'B':10,'C':10,'D':10,'E':10,'F':0,'G':10,'H':10,'I':10,'J':10},
+    #              'G':{'A':10,'B':10,'C':10,'D':10,'E':10,'F':10,'G':0,'H':10,'I':10,'J':10},
+    #              'H':{'A':10,'B':10,'C':10,'D':10,'E':10,'F':10,'G':10,'H':0,'I':10,'J':10},
+    #              'I':{'A':10,'B':10,'C':10,'D':10,'E':10,'F':10,'G':10,'H':10,'I':0,'J':10},
+    #              'J':{'A':10,'B':10,'C':10,'D':10,'E':10,'F':10,'G':10,'H':10,'I':10,'J':0}}
+
     t_0 = 0.1
+    # t_0 = 10
     print("\n ------------------------ MATRIZ DISTANCIAS --------------------\n")
 
     Matriz = pd.DataFrame(Grafo)
