@@ -1,0 +1,3 @@
+Ingrese el número de la poblacion: 4
+Ingrese el numero de iteraciones: 500
+Ingrese la tasa de evaporacion: 

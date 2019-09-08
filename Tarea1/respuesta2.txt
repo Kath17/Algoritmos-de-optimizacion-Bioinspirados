@@ -1,0 +1,489 @@
+
+ ----------------------- DATOS ------------------ 
+
+Tamaño de la poblacion: 6
+Tamaño de los cromosomas: 6
+Cantidad de iteraciones: 10
+Cruzamiento de un punto - punto: 2
+Probabilidad de mutacion: 10
+Probabilidad de cruzamiento: 90
+
+ ---------------- Generando Población Inicial ------------- 
+Lista de poblacion: ['000110', '000111', '011011', '111011', '000100', '010100']
+
+ ----------------- Evaluando Individuos -------------------
+Lista decimales sin normalizar: [1, 8, 568, 3128, -7, 281]
+Lista decimales normalizada: [8, 15, 575, 3135, 0, 288]
+
+ ------ Selección de individuos - Método de la Ruleta --------
+Lista de probabilidades: [0.19895548371051977, 0.37304153195722456, 14.299925391693609, 77.96568017905993, 0.0, 7.162397413578712]
+
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 0 ---------------------
+------------------------------------------------------------
+
+Primer random: 52.60644180848014
+Segundo random: 36.369287328106424
+
+Madre: 111011
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 111011
+Hijo 2: 111011
+   Mutó a 111001
+
+Primer random: 93.90460436168715
+Segundo random: 75.51451503579366
+
+Madre: 010100
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 010011
+Hijo 2: 111100
+   Mutó a 111000
+
+Primer random: 23.823334101190085
+Segundo random: 25.415597484758578
+
+Madre: 111011
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 111011
+Hijo 2: 111011
+   Mutó a 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['000110', '000111', '011011', '111011', '000100', '010100', '111011', '111001', '010011', '111000', '111011', '111111']
+Lista decimal total sin normalizar: [8, 15, 575, 3135, 0, 288, 3128, 2908, 248, 2801, 3128, 3592]
+Lista decimal total normalizada: [8, 15, 575, 3135, 0, 288, 3128, 2908, 248, 2801, 3128, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111011', '111011', '111001', '111000', '111011', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3128, 3128, 2908, 2801, 3128, 3592]
+Lista Nueva poblacion decimal normalizada: [3128, 3128, 2908, 2801, 3128, 3592]
+Lista de la nueva poblacion probabilidad: [16.74070109713674, 16.74070109713674, 15.563286058335564, 14.990634198554991, 16.74070109713674, 19.223976451699222]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 1 ---------------------
+------------------------------------------------------------
+
+Primer random: 75.3681353863323
+Segundo random: 96.64986454594813
+
+Madre: 111011
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+   Mutó a 111011
+Hijo 2: 111011
+   Mutó a 110011
+
+Primer random: 92.84664265355137
+Segundo random: 99.10288652918658
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 29.00089664178965
+Segundo random: 22.267541338090023
+
+Madre: 111011
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 111011
+Hijo 2: 111011
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111011', '111011', '111001', '111000', '111011', '111111', '111011', '110011', '111111', '111111', '111011', '111011']
+Lista decimal total sin normalizar: [3128, 3128, 2908, 2801, 3128, 3592, 3128, 2296, 3592, 3592, 3128, 3128]
+Lista decimal total normalizada: [3128, 3128, 2908, 2801, 3128, 3592, 3128, 2296, 3592, 3592, 3128, 3128]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111011', '111111', '111111', '111011', '111011']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3128, 3592, 3592, 3128, 3128]
+Lista Nueva poblacion decimal normalizada: [3592, 3128, 3592, 3592, 3128, 3128]
+Lista de la nueva poblacion probabilidad: [17.817460317460316, 15.515873015873016, 17.817460317460316, 17.817460317460316, 15.515873015873016, 15.515873015873016]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 2 ---------------------
+------------------------------------------------------------
+
+Primer random: 85.77250441585552
+Segundo random: 75.58993195990952
+
+Madre: 111011
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 111011
+Hijo 2: 111011
+
+Primer random: 7.28857022364936
+Segundo random: 76.6761141485173
+
+Madre: 111111
+Padre: 111011
+
+Cruzamiento
+Hijo 1: 111011
+Hijo 2: 111111
+
+Primer random: 47.750685306928276
+Segundo random: 33.781969106194495
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111011', '111111', '111111', '111011', '111011', '111011', '111011', '111011', '111111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3128, 3592, 3592, 3128, 3128, 3128, 3128, 3128, 3592, 3592, 3592]
+Lista decimal total normalizada: [3592, 3128, 3592, 3592, 3128, 3128, 3128, 3128, 3128, 3592, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 3 ---------------------
+------------------------------------------------------------
+
+Primer random: 32.25361099962927
+Segundo random: 49.936628968718
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 64.20112795146908
+Segundo random: 43.43163187260062
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 6.566519164254125
+Segundo random: 29.32452728768449
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+   Mutó a 011111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '011111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 776]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 776]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 4 ---------------------
+------------------------------------------------------------
+
+Primer random: 76.78930687833507
+Segundo random: 49.829896378047714
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 21.215197441152313
+Segundo random: 64.67552251293236
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 71.83126997757418
+Segundo random: 17.21730524575875
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 5 ---------------------
+------------------------------------------------------------
+
+Primer random: 42.29311118441728
+Segundo random: 16.45238348946667
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 38.767605426654875
+Segundo random: 91.51931410885668
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 8.212109189326423
+Segundo random: 70.59702764818945
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 6 ---------------------
+------------------------------------------------------------
+
+Primer random: 76.5565706528207
+Segundo random: 60.43731429017356
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 0.34569775274854164
+Segundo random: 99.59396187809998
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 38.53989896921394
+Segundo random: 41.82637134696344
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+   Mutó a 111101
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111101']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3356]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3356]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 7 ---------------------
+------------------------------------------------------------
+
+Primer random: 75.40211863953505
+Segundo random: 12.308519068714263
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 71.3634709393729
+Segundo random: 47.264378447774725
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 45.64930663783754
+Segundo random: 78.62723902818047
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 8 ---------------------
+------------------------------------------------------------
+
+Primer random: 70.87029231387088
+Segundo random: 1.6524680181791762
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+   Mutó a 111101
+
+Primer random: 32.2505133569031
+Segundo random: 95.50840200498662
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 14.802337506776631
+Segundo random: 88.20085668049617
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111101', '111111', '111111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3356, 3592, 3592, 3592, 3592]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3356, 3592, 3592, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
+
+ ------------------------------------------------------------
+------------------------- ITERACION: 9 ---------------------
+------------------------------------------------------------
+
+Primer random: 96.01743060021147
+Segundo random: 55.93663228577718
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+Primer random: 69.29568968258704
+Segundo random: 95.27344700357816
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+   Mutó a 110111
+
+Primer random: 31.376740580304062
+Segundo random: 66.3828156595609
+
+Madre: 111111
+Padre: 111111
+
+Cruzamiento
+Hijo 1: 111111
+Hijo 2: 111111
+
+-------------- Seleccion de la siguiente poblacion: --------------
+Lista total resultante: ['111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '111111', '110111', '111111', '111111']
+Lista decimal total sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 2696, 3592, 3592]
+Lista decimal total normalizada: [3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 3592, 2696, 3592, 3592]
+
+ ---------------------- Nueva poblacion: ------------------------
+
+Lista Nueva poblacion: ['111111', '111111', '111111', '111111', '111111', '111111']
+Lista Nueva poblacion decimal sin normalizar: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista Nueva poblacion decimal normalizada: [3592, 3592, 3592, 3592, 3592, 3592]
+Lista de la nueva poblacion probabilidad: [16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668, 16.666666666666668]
